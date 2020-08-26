@@ -23,6 +23,7 @@
         physics: {
             default: 'arcade',
             arcade: {
+                y: 0,
                 debug: false
             }
         },
@@ -44,29 +45,61 @@
         player = this.physics.add.sprite(100, 450, 'player');
         player.setCollideWorldBounds(true);
         cursors = this.input.keyboard.createCursorKeys();
+
+        this.anims.create({
+            key: 'down',
+            frames: this.anims.generateFrameNumbers('player', {start: 0, end: 4}),
+            frameRate: 18,
+            repeat: 0
+        });
+
+        this.anims.create({
+            key: 'up',
+            frames: this.anims.generateFrameNumbers('player', {start: 5, end: 9}),
+            frameRate: 18,
+            repeat: 0,
+        });
+
+        this.anims.create({
+            key: 'left',
+            frames: this.anims.generateFrameNumbers('player', {start: 10, end: 14}),
+            frameRate: 18,
+            repeat: 0,
+        });
+
+        this.anims.create({
+            key: 'right',
+            frames: this.anims.generateFrameNumbers('player', {start: 15, end: 18}),
+            frameRate: 18,
+            repeat: 0,
+        });
     }
 
     function update (){
-        if(cursors.up.isDown){
-            player.setVelocityY(-160)
-        }
 
+        player.body.velocity.x = 0
+        player.body.velocity.y = 0
+
+        if(cursors.up.isDown){
+            player.body.velocity.y -= 180;
+            player.anims.play('up', true);
+        }
+        
         else if(cursors.down.isDown){
-            player.setVelocityY(160)
+            player.body.velocity.y += 180;
+            player.anims.play('down', true);
         }
 
         else if(cursors.left.isDown){
-            player.setVelocityX(-160);
+            player.body.velocity.x -= 180;
+            player.anims.play('left', true);
         }
 
         else if(cursors.right.isDown){
-            player.setVelocityX(160);
+            player.body.velocity.x += 180;
+            player.anims.play('right', true);
         }
-
-        else{
-            player.setVelocityX(0);
-            player.setVelocityY(0);
-        }
+        
     }
 
 </script>
