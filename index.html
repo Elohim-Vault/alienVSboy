@@ -1,108 +1,13 @@
-<!doctype html> 
-<html lang="en"> 
-<head> 
-    <meta charset="UTF-8" />
-    <title>Alien VS Boy</title>
-    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
-    <style type="text/css">
-        body {
-            margin: 0;
-        }
-    </style>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Alien vs Boy</title>
+	<script type="text/javascript" src="phaser.js"></script>
+	<script type="text/javascript" src="sceneMain.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+	
 </head>
 <body>
-
-<script type="text/javascript">
-    var floor;
-    var player;
-    var cursors;
-    var config = {
-        type: Phaser.AUTO,
-        width: 800,
-        height: 600,
-        physics: {
-            default: 'arcade',
-            arcade: {
-                y: 0,
-                debug: false
-            }
-        },
-        scene: {
-            preload: preload,
-            create: create,
-            update: update
-        }
-    };
-
-    var game = new Phaser.Game(config);
-
-    function preload (){
-        this.load.image('floor', "assets/chao.png");
-        this.load.spritesheet('player', 'assets/personagem.png', {frameWidth: 45, frameHeight: 66});
-    }
-    function create (){
-        this.add.image(400, 300, 'floor');
-        player = this.physics.add.sprite(100, 450, 'player');
-        player.setCollideWorldBounds(true);
-        cursors = this.input.keyboard.createCursorKeys();
-
-        this.anims.create({
-            key: 'down',
-            frames: this.anims.generateFrameNumbers('player', {start: 0, end: 4}),
-            frameRate: 18,
-            repeat: 0
-        });
-
-        this.anims.create({
-            key: 'up',
-            frames: this.anims.generateFrameNumbers('player', {start: 5, end: 9}),
-            frameRate: 18,
-            repeat: 0,
-        });
-
-        this.anims.create({
-            key: 'left',
-            frames: this.anims.generateFrameNumbers('player', {start: 10, end: 14}),
-            frameRate: 18,
-            repeat: 0,
-        });
-
-        this.anims.create({
-            key: 'right',
-            frames: this.anims.generateFrameNumbers('player', {start: 15, end: 18}),
-            frameRate: 18,
-            repeat: 0,
-        });
-    }
-
-    function update (){
-
-        player.body.velocity.x = 0
-        player.body.velocity.y = 0
-
-        if(cursors.up.isDown){
-            player.body.velocity.y -= 180;
-            player.anims.play('up', true);
-        }
-        
-        else if(cursors.down.isDown){
-            player.body.velocity.y += 180;
-            player.anims.play('down', true);
-        }
-
-        else if(cursors.left.isDown){
-            player.body.velocity.x -= 180;
-            player.anims.play('left', true);
-        }
-
-        else if(cursors.right.isDown){
-            player.body.velocity.x += 180;
-            player.anims.play('right', true);
-        }
-        
-    }
-
-</script>
-
+<div id="phaser-game"></div>
 </body>
 </html>
